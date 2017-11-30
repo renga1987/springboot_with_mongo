@@ -1,0 +1,36 @@
+spring: 
+  cloud:
+    config:
+      enabled: true
+      name: Demo-mongodb
+      uri: http://localhost:8088/config
+  profiles:
+    active: dev
+
+logging:
+  level:
+    root: 'DEBUG'
+    org.springframework.cloud: 'ERROR'
+    org.springframework.web: ERROR
+  com.rest.comcast.MNGODB: 'DEBUG'
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: /D:/Output_path/application.log
+  
+hystrix:
+  command:
+      default:
+          circuitBreaker:
+             errorThresholdPercentage: 50 # 50%
+             sleepWindowInMilliseconds: 5000 # 5s
+      customCommandKey:
+          fallback:
+             enabled: true
+          circuitBreaker:
+             errorThresholdPercentage: 75 # 75%
+             sleepWindowInMilliseconds: 15000 # 15s
+  
+  
+  
+  
